@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; style-src 'self'; script-src 'self'" />
+    <title>Personal Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <header>
+      <h1>Expense Tracker</h1>
+      <button id="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+    </header>
+
+    <main>
+
+      <!-- Add Transaction Form -->
+      <section id="form-section" aria-labelledby="form-heading">
+        <h2 id="form-heading">Add Transaction</h2>
+        <form id="transaction-form" novalidate>
+
+          <div class="form-group">
+            <label for="desc">Description</label>
+            <input id="desc" type="text" placeholder="e.g. Grocery shopping"
+                   autocomplete="off" />
+            <span id="desc-error" class="field-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount ($)</label>
+            <input id="amount" type="number" min="0.01" step="0.01"
+                   placeholder="0.00" />
+            <span id="amount-error" class="field-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category">
+              <option value="">-- Select category --</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Bills">Bills</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Other">Other</option>
+            </select>
+            <span id="category-error" class="field-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input id="date" type="date" />
+            <span id="date-error" class="field-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <button type="submit">Add Transaction</button>
+
+        </form>
+      </section>
+
+      <!-- Summary Card -->
+      <section id="summary-section" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Summary</h2>
+        <div id="summary-card">
+          <p class="total-label">Total Spending</p>
+          <span id="total-display">$0.00</span>
+          <div id="limit-warning" aria-live="polite" hidden>⚠ Over limit!</div>
+        </div>
+        <div class="form-group">
+          <label for="spending-limit">Spending Limit ($)</label>
+          <input id="spending-limit" type="number" min="0" step="0.01"
+                 placeholder="0.00 (disabled)" />
+        </div>
+      </section>
+
+      <!-- Transaction List -->
+      <section id="list-section" aria-labelledby="list-heading">
+        <h2 id="list-heading">Transactions</h2>
+        <div class="list-controls">
+          <label for="sort-select" class="sr-only">Sort transactions</label>
+          <select id="sort-select" aria-label="Sort transactions">
+            <option value="default">Newest First (Default)</option>
+            <option value="amount-desc">Amount: High to Low</option>
+            <option value="amount-asc">Amount: Low to High</option>
+            <option value="category-asc">Category: A–Z</option>
+          </select>
+        </div>
+        <ul id="transaction-list" aria-live="polite" aria-label="Transaction list">
+          <!-- Transaction items rendered here by app.js -->
+        </ul>
+      </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
